@@ -20,7 +20,7 @@ public class hishov extends AppCompatActivity {
     String aaa, bbb, ccc, url;
     WebView ww;
     TextView t1, t2;
-    Intent mi = getIntent();
+    Intent mi ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class hishov extends AppCompatActivity {
         t2 = findViewById(R.id.textView4);
         ww.getSettings().setJavaScriptEnabled(true);
         ww.setWebViewClient(new MyWebViewClient());
-
+        mi= getIntent();
         intentpe();
         hoshovy();
     }
@@ -44,7 +44,7 @@ public class hishov extends AppCompatActivity {
     private void hoshovy() {
         dis = (b * b) - 4 * a * c; //Abbreviation - Discriminant
         ans1 = (-b - (Math.sqrt(dis))) / 2 * a;
-        ans2 = (-b - (Math.sqrt(dis))) / 2 * a;
+        ans2 = (-b + (Math.sqrt(dis))) / 2 * a;
         if ((dis) < 0) {
             t1.setText("no answer");
             t2.setText("no answer");
@@ -58,11 +58,9 @@ public class hishov extends AppCompatActivity {
 
 
     public void intentpe() {
-
-        a = Float.valueOf(mi.getStringExtra("aa"));
-        b = Float.valueOf(mi.getStringExtra("bb"));
-        c = Float.valueOf(mi.getStringExtra("cc"));
-
+        a = mi.getFloatExtra("aa",1);
+        b = mi.getFloatExtra("bb",1);
+        c = mi.getFloatExtra("cc",1);
         aaa = a.toString();
         bbb = b.toString();
         ccc = c.toString();
@@ -73,11 +71,14 @@ public class hishov extends AppCompatActivity {
         } else if (ccc.isEmpty()) {
             url = "https://www.google.com/search?q=" + aaa + "x%5E2%2B" + bbb + "x";
         }
+        else {
+            url = "https://www.google.com/search?q=" + aaa + "x%5E2%2B" + bbb + "x%2B"+ccc;
+        }
         ww.loadUrl(url);
     }
 
 
-
+    //https://www.google.com/search?q=2 x%5E2%2B 5x%2B 25 &rlz=1C1CHZL_iwIL725IL725&oq=2&aqs=chrome.0.69i59j69i57j69i61j69i60l2j69i65l3.1483j0j1&sourceid=chrome&ie=UTF-8
 
 
 
